@@ -4,7 +4,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/banking_accounts
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/banking_accounts}
 
 services:
   customer:
