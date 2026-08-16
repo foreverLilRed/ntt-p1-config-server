@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/banking_accounts
+
+# External service URLs (no hardcoded values in application code)
+services:
+  customer:
+    base-url: http://localhost:8081
+
+account:
+  checking:
+    maintenance-fee: 10.00
+  savings:
+    monthly-movement-limit: 5
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.bank.account: DEBUG

@@ -1,0 +1,15 @@
+# Common configuration shared by all microservices
+info:
+  system: banking-microservices
+  part: "01"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    com.bank: DEBUG
