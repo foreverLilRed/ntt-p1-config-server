@@ -22,7 +22,7 @@ spring:
         - id: customer-service
           uri: lb://customer-service
           predicates:
-            - Path=/api/v1/customers/**
+            - Path=/api/v1/customers/**,/api/v1/catalogs/**
         - id: account-service
           uri: lb://account-service
           predicates:
@@ -35,6 +35,23 @@ spring:
           uri: lb://report-service
           predicates:
             - Path=/api/v1/reports/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/v1/auth/**
+        - id: yanki-service
+          uri: lb://yanki-service
+          predicates:
+            - Path=/api/v1/yanki/**
+        - id: debit-cards
+          uri: lb://account-service
+          predicates:
+            - Path=/api/v1/debit-cards/**
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:banking-p3-hs256-secret-key-32bytes-min}
+    public-paths: /api/v1/auth/**,/actuator/**,/fallback
 
 resilience4j:
   timelimiter:

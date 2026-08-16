@@ -1,7 +1,7 @@
 # Common configuration shared by all microservices
 info:
   system: banking-microservices
-  part: "02"
+  part: "03"
 
 management:
   endpoints:
@@ -49,3 +49,24 @@ resilience4j:
         baseConfig: default
       accountService:
         baseConfig: default
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:banking-p3-hs256-secret-key-32bytes-min}
+    expiration-ms: 3600000
+    issuer: banking-auth-service
