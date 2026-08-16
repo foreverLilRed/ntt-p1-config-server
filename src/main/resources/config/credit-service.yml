@@ -8,7 +8,7 @@ spring:
 
 services:
   customer:
-    base-url: http://localhost:8081
+    base-url: ${CUSTOMER_SERVICE_URL:http://localhost:8081}
 
 springdoc:
   api-docs:

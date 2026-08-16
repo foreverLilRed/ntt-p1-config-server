@@ -1,7 +1,7 @@
 # Common configuration shared by all microservices
 info:
   system: banking-microservices
-  part: "01"
+  part: "02"
 
 management:
   endpoints:
@@ -13,3 +13,39 @@ logging:
   level:
     root: INFO
     com.bank: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+resilience4j:
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 2s
+    instances:
+      customerService:
+        baseConfig: default
+      creditService:
+        baseConfig: default
+      accountService:
+        baseConfig: default
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+    instances:
+      customerService:
+        baseConfig: default
+      creditService:
+        baseConfig: default
+      accountService:
+        baseConfig: default
